@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'hexlet.code'
+version '1.0.3-SNAPSHOT'
+
+application {
+
+    mainClass = 'hexlet.code.App'
+
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileJava {
+    options.release = 17
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "hexlet.code.App"
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
