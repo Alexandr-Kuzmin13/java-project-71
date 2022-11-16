@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
+    id 'jacoco'
+    id 'com.adarshr.test-logger' version '3.2.0'
 }
 
 group 'hexlet.code'
@@ -28,6 +30,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
     // https://mvnrepository.com/artifact/org.json/json
     implementation group: 'org.json', name: 'json', version: '20220320'
+    //implementation 'com.google.code.gson:gson:2.10'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 
 }
@@ -43,6 +46,23 @@ compileJava {
 
 checkstyle {
     toolVersion '9.2.1'
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+    }
+    dependsOn test // tests are required to run before generating the report
 }
 
 jar {
