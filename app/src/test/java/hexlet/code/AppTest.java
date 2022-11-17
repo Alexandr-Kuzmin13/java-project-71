@@ -2,15 +2,14 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
+import java.nio.file.Path;
+
 import static org.assertj.core.api.Assertions.assertThat;
 class AppTest {
     @Test
     public void testOne() throws Exception {
-        //File result1 = new File("mnt/c/rusglagol/java-project-71/app/src/test/resources/file1.json");
-        //File result2 = new File("mnt/c/rusglagol/java-project-71/app/src/test/resources/file2.json");
-        File result1 = new File("file1.json");
-        File result2 = new File("file2.json");
+        Path result1 = Path.of("file1.json");
+        Path result2 = Path.of("file2.json");
         var actual = Differ.generate(result1, result2);
         var expected = """
                 {
