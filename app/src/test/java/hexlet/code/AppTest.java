@@ -2,14 +2,17 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.Path;
+import java.io.File;
 
+import static java.nio.file.Files.readString;
 import static org.assertj.core.api.Assertions.assertThat;
 class AppTest {
     @Test
     public void testOne() throws Exception {
-        Path result1 = Path.of("file1.json");
-        Path result2 = Path.of("file2.json");
+        var file1 = new File("file1.json");
+        var file2 = new File("file2.json");
+        var result1 = readString(file1.toPath());
+        var result2 = readString(file2.toPath());
         var actual = Differ.generate(result1, result2);
         var expected = """
                 {
