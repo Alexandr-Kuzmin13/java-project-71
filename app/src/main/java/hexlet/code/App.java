@@ -19,7 +19,7 @@ public final class App implements Callable<String> {
     private final File file2 = new File("mnt/c/rusglagol/java-project-71/app");
 
     @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish")
-    private String format;
+    String format;
     @Override
     public String call() throws Exception {
         var filepath1 = file1.toPath().toString();
