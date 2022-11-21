@@ -4,6 +4,7 @@ plugins {
     id 'checkstyle'
     id 'jacoco'
     id 'com.adarshr.test-logger' version '3.2.0'
+    id 'io.freefair.lombok' version '6.4.1'
 }
 
 group 'hexlet.code'
@@ -27,11 +28,15 @@ dependencies {
     implementation 'info.picocli:picocli:4.7.0'
     annotationProcessor 'info.picocli:picocli-codegen:4.7.0'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.3'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.14.0'
+    //implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.14.0'
     // https://mvnrepository.com/artifact/org.json/json
     implementation group: 'org.json', name: 'json', version: '20220320'
     //implementation 'com.google.code.gson:gson:2.10'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    // https://mavenlibs.com/maven/dependency/org.skyscreamer/jsonassert
+    implementation group: 'org.skyscreamer', name: 'jsonassert', version: '1.5.1'
 
 }
 

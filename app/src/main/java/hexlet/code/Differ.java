@@ -1,23 +1,23 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.TreeSet;
+import java.util.Objects;
 
 public class Differ {
 
-    public static String generate(String filepath1, String filepath2) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        HashMap<String, Object> data1 = mapper.readValue(filepath1, new TypeReference<>() { });
-        HashMap<String, Object> data2 = mapper.readValue(filepath2, new TypeReference<>() { });
+    public static String generate(String filepath1, String filepath2, String format) throws IOException {
 
+        HashMap<String, Object> data1 = Parser.parsing(filepath1);
+        HashMap<String, Object> data2 = Parser.parsing(filepath2);
         LinkedHashMap<String, Object> result = new LinkedHashMap<>();
+
+        assert data1 != null;
         TreeSet<String> keys = new TreeSet<>(data1.keySet());
+        assert data2 != null;
         keys.addAll(data2.keySet());
 
         for (String key: keys) {
@@ -26,17 +26,18 @@ public class Differ {
                 result.put("+ " + key, data2.get(key));
             } else if (!data2.containsKey(key)) {
                 result.put("- " + key, data1.get(key));
-            } else if (data1.get(key).equals(data2.get(key))) {
-                result.put(key, data1.get(key));
-            } else if (!data1.get(key).equals(data2.get(key))) {
+            } else if (Objects.equals(data1.get(key), data2.get(key))) {
+                result.put("  " + key, data1.get(key));
+            } else if (!Objects.equals(data1.get(key), data2.get(key))) {
                 result.put("- " + key, data1.get(key));
                 result.put("+ " + key, data2.get(key));
             }
         }
-        StringBuilder s = new StringBuilder();
-        for (Map.Entry<String, Object> resultElement: result.entrySet()) {
-            s.append(resultElement.getKey()).append(": ").append(resultElement.getValue().toString()).append("\n");
-        }
-        return "{\n" + s + "}";
+
+        return Formatter.formatter(result, format);
+
     }
+
+
+
 }
