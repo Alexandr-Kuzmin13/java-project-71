@@ -16,7 +16,6 @@ public class Parser {
         ObjectMapper mapperJson = new ObjectMapper();
         ObjectMapper mapperYml = new ObjectMapper(new YAMLFactory());
         String data = readString(FileSystems.getDefault().getPath(filepath));
-        System.out.println(data);
 
         if (filepath.contains(".json")) {
             return mapperJson.readValue(data, new TypeReference<>() { });
