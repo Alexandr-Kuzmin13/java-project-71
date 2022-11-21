@@ -11,7 +11,6 @@ public class Differ {
 
     public static String generate(String filepath1, String filepath2) throws IOException {
 
-
         var result = generateMap(filepath1, filepath2);
 
         return Formatter.formatter(result, "stylish");
