@@ -25,7 +25,8 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
           JACOCO_SOURCE_PATH: src/main/java
-          format-coverage: target/site/jacoco/jacoco.xml
         with:
+          format-coverage: target/site/jacoco/jacoco.xml
+          ./cc-test-reporter: upload-coverage
           coverageCommand: make report
           coverageLocations: ${{github.workspace}}/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
