@@ -4,11 +4,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import hexlet.code.formatters.Json;
 import hexlet.code.formatters.Plain;
 import hexlet.code.formatters.Stylish;
-
 import java.util.LinkedHashMap;
 
 public class Formatter {
-    public static String formatter(LinkedHashMap<String, Object> result, String format) throws JsonProcessingException {
+    public static String format(LinkedHashMap<String, DifferValue> result, String format)
+            throws JsonProcessingException {
 
         switch (format) {
             case "stylish" -> {

@@ -5,29 +5,26 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
-import java.io.File;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
-public final class App implements Callable<String> {
+public final class App implements Callable<Integer> {
 
-    @Parameters(index = "0", description = "path to first file", defaultValue = "file3.json")
-    private final File file1 = new File("mnt/c/rusglagol/java-project-71/app");
+    @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file", defaultValue = "file3.json")
+    private String filepath1;
 
-    @Parameters(index = "1", description = "path to second file", defaultValue = "file4.json")
-    private final File file2 = new File("mnt/c/rusglagol/java-project-71/app");
+    @Parameters(index = "1", paramLabel = "filepath2", description = "path to second file", defaultValue = "file4.json")
+    private String filepath2;
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish")
-    private String format = "stylish";
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "json")
+    private String format = "json";
     @Override
-    public String call() throws Exception {
-        var filepath1 = file1.toPath().toString();
-        var filepath2 = file2.toPath().toString();
+    public Integer call() throws Exception {
 
         var diff = Differ.generate(filepath1, filepath2, format);
         System.out.println(diff);
-        return null;
+        return 0;
     }
 
     public static void main(String[] args) {

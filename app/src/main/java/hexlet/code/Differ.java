@@ -1,51 +1,28 @@
 package hexlet.code;
 
-
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.TreeSet;
-import java.util.Objects;
 
 public class Differ {
 
     public static String generate(String filepath1, String filepath2) throws IOException {
 
-        var result = generateMap(filepath1, filepath2);
+        HashMap<String, Object> data1 = ParserFactory.getParser(filepath1);
+        HashMap<String, Object> data2 = ParserFactory.getParser(filepath2);
 
-        return Formatter.formatter(result, "stylish");
+        var result =  ResultMap.resultMap(data1, data2);
+
+        return Formatter.format(result, "stylish");
 
     }
     public static String generate(String filepath1, String filepath2, String format) throws IOException {
 
-        var result = generateMap(filepath1, filepath2);
+        HashMap<String, Object> data1 = ParserFactory.getParser(filepath1);
+        HashMap<String, Object> data2 = ParserFactory.getParser(filepath2);
 
-        return Formatter.formatter(result, format);
+        var result = ResultMap.resultMap(data1, data2);
 
-    }
-    public static LinkedHashMap<String, Object> generateMap(String filepath1, String filepath2) throws IOException {
-        HashMap<String, Object> data1 = Parser.parsing(filepath1);
-        HashMap<String, Object> data2 = Parser.parsing(filepath2);
-        LinkedHashMap<String, Object> result = new LinkedHashMap<>();
+        return Formatter.format(result, format);
 
-        assert data1 != null;
-        TreeSet<String> keys = new TreeSet<>(data1.keySet());
-        assert data2 != null;
-        keys.addAll(data2.keySet());
-
-        for (String key: keys) {
-
-            if (!data1.containsKey(key)) {
-                result.put("+ " + key, data2.get(key));
-            } else if (!data2.containsKey(key)) {
-                result.put("- " + key, data1.get(key));
-            } else if (Objects.equals(data1.get(key), data2.get(key))) {
-                result.put("  " + key, data1.get(key));
-            } else if (!Objects.equals(data1.get(key), data2.get(key))) {
-                result.put("- " + key, data1.get(key));
-                result.put("+ " + key, data2.get(key));
-            }
-        }
-        return result;
     }
 }
