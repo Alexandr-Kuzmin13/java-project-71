@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Plain {
-    public static String plain(LinkedHashMap<String, DifferValue> result) {
+    public static String plain(LinkedHashMap<String, DifferValue> resultMap) {
 
         StringBuilder textResult = new StringBuilder();
 
-        for (Map.Entry<String, DifferValue> resultElement: result.entrySet()) {
+        for (Map.Entry<String, DifferValue> resultElement: resultMap.entrySet()) {
 
             var getKeyElement = resultElement.getKey();
             var getKeyIndexNull = resultElement.getValue().getStatus();

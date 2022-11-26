@@ -5,13 +5,13 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Stylish {
-    public static String stylish(LinkedHashMap<String, DifferValue> result) {
+    public static String stylish(LinkedHashMap<String, DifferValue> resultMap) {
 
         StringBuilder resultBuilder = new StringBuilder();
 
         resultBuilder.append("{\n");
 
-        for (Map.Entry<String, DifferValue> resultElement: result.entrySet()) {
+        for (Map.Entry<String, DifferValue> resultElement: resultMap.entrySet()) {
 
             var getKeyElement = resultElement.getKey();
             var getKeyIndexNull = resultElement.getValue().getStatus();

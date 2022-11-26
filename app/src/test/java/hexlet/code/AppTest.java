@@ -9,72 +9,72 @@ class AppTest {
     @Test
     public void testOneJson() throws Exception {
 
-        var actual = Differ.generate("file1.json", "file2.json", "stylish");
+        var actual = Differ.generate("resources/file1.json", "resources/file2.json", "stylish");
 
-        var expected = ParserFactory.writerContent("stylishFile1File2.txt");
+        var expected = ParserFactory.writerContent("resources/stylishFile1File2.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
     @Test
     public void testOneYml() throws Exception {
 
-        var actual = Differ.generate("file1.yml", "file2.yml", "stylish");
+        var actual = Differ.generate("resources/file1.yml", "resources/file2.yml", "stylish");
 
-        var expected = ParserFactory.writerContent("stylishFile1File2.txt");
+        var expected = ParserFactory.writerContent("resources/stylishFile1File2.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
     @Test
     public void testTwoJson() throws Exception {
 
-        var actual = Differ.generate("file3.json", "file4.json", "stylish");
+        var actual = Differ.generate("resources/file3.json", "resources/file4.json", "stylish");
 
-        var expected = ParserFactory.writerContent("stylishFile3File4.txt");
+        var expected = ParserFactory.writerContent("resources/stylishFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
     @Test
     public void testTwoYml() throws Exception {
 
-        var actual = Differ.generate("file3.yml", "file4.yml", "stylish");
+        var actual = Differ.generate("resources/file3.yml", "resources/file4.yml", "stylish");
 
-        var expected = ParserFactory.writerContent("stylishFile3File4.txt");
+        var expected = ParserFactory.writerContent("resources/stylishFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
     @Test
     public void testThreeJson() throws Exception {
 
-        var actual = Differ.generate("file3.json", "file4.json", "plain");
+        var actual = Differ.generate("resources/file3.json", "resources/file4.json", "plain");
 
-        var expected = ParserFactory.writerContent("plainFile3File4.txt");
+        var expected = ParserFactory.writerContent("resources/plainFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
     @Test
     public void testThreeYml() throws Exception {
 
-        var actual = Differ.generate("file3.yml", "file4.yml", "plain");
+        var actual = Differ.generate("resources/file3.yml", "resources/file4.yml", "plain");
 
-        var expected = ParserFactory.writerContent("plainFile3File4.txt");
+        var expected = ParserFactory.writerContent("resources/plainFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
     @Test
     public void testFourJson() throws Exception {
 
-        var actual = Differ.generate("file3.json", "file4.json", "json");
+        var actual = Differ.generate("resources/file3.json", "resources/file4.json", "json");
 
-        var expected = ParserFactory.writerContent("jsonFile3File4.json");
+        var expected = ParserFactory.writerContent("resources/jsonFile3File4.json");
 
         JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
     }
     @Test
     public void testFourYml() throws Exception {
 
-        var actual = Differ.generate("file3.yml", "file4.yml", "json");
+        var actual = Differ.generate("resources/file3.yml", "resources/file4.yml", "json");
 
-        var expected = ParserFactory.writerContent("jsonFile3File4.json");
+        var expected = ParserFactory.writerContent("resources/jsonFile3File4.json");
 
         JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
     }

@@ -11,14 +11,14 @@ import java.util.concurrent.Callable;
         description = "Compares two configuration files and shows a difference.")
 public final class App implements Callable<Integer> {
 
-    @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file", defaultValue = "file3.json")
+    @Parameters(index = "0", description = "path to first file", defaultValue = "resources/file3.json")
     private String filepath1;
 
-    @Parameters(index = "1", paramLabel = "filepath2", description = "path to second file", defaultValue = "file4.json")
+    @Parameters(index = "1", description = "path to second file", defaultValue = "resources/file4.json")
     private String filepath2;
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "json")
-    private String format = "json";
+    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]", defaultValue = "stylish")
+    private String format = "stylish";
     @Override
     public Integer call() throws Exception {
 
