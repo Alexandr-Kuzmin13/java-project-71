@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.parsers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -9,13 +9,8 @@ import java.util.HashMap;
 
 public final class YmlParser implements Parser {
 
-    private final String content;
-    public YmlParser(String ymlContent) {
-        this.content = ymlContent;
-    }
-
     @Override
-    public HashMap<String, Object> parse() throws JsonProcessingException {
+    public HashMap<String, Object> parse(String content) throws JsonProcessingException {
         ObjectMapper mapperYml = new ObjectMapper(new YAMLFactory());
         return mapperYml.readValue(content, new TypeReference<>() { });
     }

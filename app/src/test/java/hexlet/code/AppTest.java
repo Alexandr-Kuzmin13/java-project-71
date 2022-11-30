@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.parsers.ParserFactory;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -11,7 +12,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file1.json", "resources/file2.json", "stylish");
 
-        var expected = ParserFactory.writerContent("resources/stylishFile1File2.txt");
+        var expected = ParserFactory.getContent("resources/stylishFile1File2.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -20,7 +21,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file1.yml", "resources/file2.yml", "stylish");
 
-        var expected = ParserFactory.writerContent("resources/stylishFile1File2.txt");
+        var expected = ParserFactory.getContent("resources/stylishFile1File2.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -29,7 +30,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file3.json", "resources/file4.json", "stylish");
 
-        var expected = ParserFactory.writerContent("resources/stylishFile3File4.txt");
+        var expected = ParserFactory.getContent("resources/stylishFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -38,7 +39,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file3.yml", "resources/file4.yml", "stylish");
 
-        var expected = ParserFactory.writerContent("resources/stylishFile3File4.txt");
+        var expected = ParserFactory.getContent("resources/stylishFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -47,7 +48,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file3.json", "resources/file4.json", "plain");
 
-        var expected = ParserFactory.writerContent("resources/plainFile3File4.txt");
+        var expected = ParserFactory.getContent("resources/plainFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -56,7 +57,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file3.yml", "resources/file4.yml", "plain");
 
-        var expected = ParserFactory.writerContent("resources/plainFile3File4.txt");
+        var expected = ParserFactory.getContent("resources/plainFile3File4.txt");
 
         assertThat(actual).isEqualTo(expected);
     }
@@ -65,7 +66,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file3.json", "resources/file4.json", "json");
 
-        var expected = ParserFactory.writerContent("resources/jsonFile3File4.json");
+        var expected = ParserFactory.getContent("resources/jsonFile3File4Map.json");
 
         JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
     }
@@ -74,7 +75,7 @@ class AppTest {
 
         var actual = Differ.generate("resources/file3.yml", "resources/file4.yml", "json");
 
-        var expected = ParserFactory.writerContent("resources/jsonFile3File4.json");
+        var expected = ParserFactory.getContent("resources/jsonFile3File4Map.json");
 
         JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
     }

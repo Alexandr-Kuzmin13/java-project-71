@@ -5,10 +5,10 @@ import java.util.LinkedHashMap;
 import java.util.Objects;
 import java.util.TreeSet;
 
-public class ResultMap {
+public class DiffBuilder {
 
     public static LinkedHashMap<String, DifferValue>
-        resultMap(HashMap<String, Object> data1, HashMap<String, Object> data2) {
+        getDiff(HashMap<String, Object> data1, HashMap<String, Object> data2) {
         LinkedHashMap<String, DifferValue> result = new LinkedHashMap<>();
 
         TreeSet<String> keys = new TreeSet<>(data1.keySet());

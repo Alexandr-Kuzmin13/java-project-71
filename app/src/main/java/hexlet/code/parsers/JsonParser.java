@@ -1,4 +1,4 @@
-package hexlet.code;
+package hexlet.code.parsers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -8,13 +8,8 @@ import java.util.HashMap;
 
 public final class JsonParser implements Parser {
 
-    private final String content;
-    public JsonParser(String jsonContent) {
-        this.content = jsonContent;
-    }
-
     @Override
-    public HashMap<String, Object> parse() throws JsonProcessingException {
+    public HashMap<String, Object> parse(String content) throws JsonProcessingException {
         ObjectMapper mapperJson = new ObjectMapper();
         return mapperJson.readValue(content, new TypeReference<>() { });
     }

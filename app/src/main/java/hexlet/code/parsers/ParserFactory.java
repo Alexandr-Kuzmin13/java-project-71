@@ -1,6 +1,4 @@
-package hexlet.code;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
+package hexlet.code.parsers;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,20 +9,22 @@ import java.util.HashMap;
 public class ParserFactory {
     public static HashMap<String, Object> getParser(String filepath) throws IOException {
 
-        String content = writerContent(filepath);
+        String content = ParserFactory.getContent(filepath);
+
+        Parser parser;
 
         if (filepath.endsWith("json")) {
-            return runParser(new JsonParser(content));
+            parser = new JsonParser();
         } else if (filepath.endsWith("yml")) {
-            return runParser(new YmlParser(content));
+            parser = new YmlParser();
+        } else {
+            throw new IOException("parser can not be null!");
         }
-        return null;
+
+        return DataSupplier.dataSupplier(parser, content);
     }
-    public static String writerContent(String filepath) throws IOException {
+    public static String getContent(String filepath) throws IOException {
         Path path = Paths.get(filepath).toAbsolutePath().normalize();
         return Files.readString(path);
-    }
-    public static HashMap<String, Object> runParser(Parser parser) throws JsonProcessingException {
-        return parser.parse();
     }
 }

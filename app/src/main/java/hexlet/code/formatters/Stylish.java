@@ -13,21 +13,23 @@ public class Stylish {
 
         for (Map.Entry<String, DifferValue> resultElement: resultMap.entrySet()) {
 
-            var getKeyElement = resultElement.getKey();
-            var getKeyIndexNull = resultElement.getValue().getStatus();
-            var getKeyIndexOne = resultElement.getValue().getValueOne();
-            var getKeyIndexTwo = resultElement.getValue().getValueTwo();
-            switch (getKeyIndexNull) {
+            var key = resultElement.getKey();
+            var value = resultElement.getValue();
+            var keyIndexNull = value.getStatus();
+            var keyIndexOne = value.getValueOne();
+            var keyIndexTwo = value.getValueTwo();
+            switch (keyIndexNull) {
                 case "changed" -> {
-                    resultBuilder.append(String.format("  - %s: %s\n", getKeyElement, getKeyIndexOne));
-                    resultBuilder.append(String.format("  + %s: %s\n", getKeyElement, getKeyIndexTwo));
+                    resultBuilder.append(String.format("  - %s: %s\n", key, keyIndexOne));
+                    resultBuilder.append(String.format("  + %s: %s\n", key, keyIndexTwo));
                 }
-                case "unchanged" -> resultBuilder.append(String.format("    %s: %s\n", getKeyElement, getKeyIndexOne));
-                case "delete" -> resultBuilder.append(String.format("  - %s: %s\n", getKeyElement, getKeyIndexOne));
-                case "add" -> resultBuilder.append(String.format("  + %s: %s\n", getKeyElement, getKeyIndexOne));
-                default -> throw new IllegalStateException("Unexpected value: " + getKeyIndexNull);
+                case "unchanged" -> resultBuilder.append(String.format("    %s: %s\n", key, keyIndexOne));
+                case "delete" -> resultBuilder.append(String.format("  - %s: %s\n", key, keyIndexOne));
+                case "add" -> resultBuilder.append(String.format("  + %s: %s\n", key, keyIndexOne));
+                default -> throw new RuntimeException("Unexpected value: " + keyIndexNull);
             }
         }
+
         resultBuilder.append("}");
 
         return resultBuilder.toString().replaceAll("\\R$", "");

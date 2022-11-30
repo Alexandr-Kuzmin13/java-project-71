@@ -12,31 +12,32 @@ public class Plain {
 
         for (Map.Entry<String, DifferValue> resultElement: resultMap.entrySet()) {
 
-            var getKeyElement = resultElement.getKey();
-            var getKeyIndexNull = resultElement.getValue().getStatus();
-            var getKeyIndexOne = checkComplexValue(resultElement.getValue().getValueOne());
-            var getKeyIndexTwo = checkComplexValue(resultElement.getValue().getValueTwo());
-            switch (getKeyIndexNull) {
+            var key = resultElement.getKey();
+            var value = resultElement.getValue();
+            var keyIndexNull = value.getStatus();
+            var keyIndexOne = checkComplexValue(value.getValueOne());
+            var keyIndexTwo = checkComplexValue(value.getValueTwo());
+            switch (keyIndexNull) {
                 case "changed" -> textResult.append(String.format("Property '%s' was updated. From %s to %s\n",
-                        getKeyElement, getKeyIndexOne, getKeyIndexTwo));
+                        key, keyIndexOne, keyIndexTwo));
                 case "unchanged" -> {
                 }
-                case "delete" -> textResult.append(String.format("Property '%s' was removed\n", getKeyElement));
+                case "delete" -> textResult.append(String.format("Property '%s' was removed\n", key));
                 case "add" -> textResult.append(String.format("Property '%s' was added with value: %s\n",
-                        getKeyElement, getKeyIndexOne));
-                default -> throw new IllegalStateException("Unexpected value: " + getKeyIndexNull);
+                        key, keyIndexOne));
+                default -> throw new IllegalStateException("Unexpected value: " + keyIndexNull);
             }
         }
         return textResult.toString().replaceAll("\\R$", "");
     }
 
-    public static String checkComplexValue(Object getValue) {
-        if (getValue instanceof String) {
-            return "'" + getValue + "'";
+    public static String checkComplexValue(Object value) {
+        if (value instanceof String) {
+            return "'" + value + "'";
         }
-        if (getValue instanceof Map || getValue instanceof List) {
+        if (value instanceof Map || value instanceof List) {
             return "[complex value]";
         }
-        return "" + getValue + "";
+        return "" + value + "";
     }
 }

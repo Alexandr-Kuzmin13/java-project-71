@@ -1,9 +1,7 @@
-package hexlet.code;
+package hexlet.code.formatters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import hexlet.code.formatters.Json;
-import hexlet.code.formatters.Plain;
-import hexlet.code.formatters.Stylish;
+import hexlet.code.DifferValue;
 import java.util.LinkedHashMap;
 
 public class Formatter {
