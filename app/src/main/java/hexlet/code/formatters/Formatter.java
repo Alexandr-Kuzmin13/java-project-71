@@ -18,7 +18,7 @@ public class Formatter {
             case "json" -> {
                 return Json.json(result);
             }
-            default -> throw new IllegalStateException("Unexpected value: " + format);
+            default -> throw new RuntimeException("Unexpected value: " + format);
         }
     }
 }

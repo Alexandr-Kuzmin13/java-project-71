@@ -15,18 +15,18 @@ public class Stylish {
 
             var key = resultElement.getKey();
             var value = resultElement.getValue();
-            var keyIndexNull = value.getStatus();
-            var keyIndexOne = value.getValueOne();
-            var keyIndexTwo = value.getValueTwo();
-            switch (keyIndexNull) {
+            var status = value.getStatus();
+            var value1 = value.getValueOne();
+            var value2 = value.getValueTwo();
+            switch (status) {
                 case "changed" -> {
-                    resultBuilder.append(String.format("  - %s: %s\n", key, keyIndexOne));
-                    resultBuilder.append(String.format("  + %s: %s\n", key, keyIndexTwo));
+                    resultBuilder.append(String.format("  - %s: %s\n", key, value1));
+                    resultBuilder.append(String.format("  + %s: %s\n", key, value2));
                 }
-                case "unchanged" -> resultBuilder.append(String.format("    %s: %s\n", key, keyIndexOne));
-                case "delete" -> resultBuilder.append(String.format("  - %s: %s\n", key, keyIndexOne));
-                case "add" -> resultBuilder.append(String.format("  + %s: %s\n", key, keyIndexOne));
-                default -> throw new RuntimeException("Unexpected value: " + keyIndexNull);
+                case "unchanged" -> resultBuilder.append(String.format("    %s: %s\n", key, value1));
+                case "delete" -> resultBuilder.append(String.format("  - %s: %s\n", key, value1));
+                case "add" -> resultBuilder.append(String.format("  + %s: %s\n", key, value1));
+                default -> throw new RuntimeException("Unexpected value: " + status);
             }
         }
 

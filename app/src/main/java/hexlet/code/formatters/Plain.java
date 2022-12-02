@@ -14,24 +14,24 @@ public class Plain {
 
             var key = resultElement.getKey();
             var value = resultElement.getValue();
-            var keyIndexNull = value.getStatus();
-            var keyIndexOne = checkComplexValue(value.getValueOne());
-            var keyIndexTwo = checkComplexValue(value.getValueTwo());
-            switch (keyIndexNull) {
+            var status = value.getStatus();
+            var value1 = normalize(value.getValueOne());
+            var value2 = normalize(value.getValueTwo());
+            switch (status) {
                 case "changed" -> textResult.append(String.format("Property '%s' was updated. From %s to %s\n",
-                        key, keyIndexOne, keyIndexTwo));
+                        key, value1, value2));
                 case "unchanged" -> {
                 }
                 case "delete" -> textResult.append(String.format("Property '%s' was removed\n", key));
                 case "add" -> textResult.append(String.format("Property '%s' was added with value: %s\n",
-                        key, keyIndexOne));
-                default -> throw new IllegalStateException("Unexpected value: " + keyIndexNull);
+                        key, value1));
+                default -> throw new RuntimeException("Unexpected value: " + status);
             }
         }
         return textResult.toString().replaceAll("\\R$", "");
     }
 
-    public static String checkComplexValue(Object value) {
+    public static String normalize(Object value) {
         if (value instanceof String) {
             return "'" + value + "'";
         }
